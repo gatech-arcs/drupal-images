@@ -1,0 +1,24 @@
+{
+    "name": "gtsciences/gt-images",
+    "description": "Images, Responsive Images, and Image Styles, oh my!",
+    "type": "drupal-recipe",
+    "license": "GPL-2.0-or-later",
+    "_comment": [
+        "SAM can be removed once core issue is resolved: https://www.drupal.org/project/drupal/issues/1156338"
+    ],
+    "authors": [
+        {
+            "name": "Michael Sheldon",
+            "homepage": "https://cos.gatech.edu/",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "drupal/core": ">=10.4",
+
+        "drupal/blazy": "^3.0",
+        "drupal/crop": "^2.4",
+        "drupal/easy_responsive_images": "^1.4",
+        "drupal/image_style_quality": "^1.7"
+    }
+}

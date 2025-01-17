@@ -1,0 +1,36 @@
+name: 'GT Images'
+description: 'Images, Responsive Images, and Image Styles, oh my!''
+type: 'Site'
+
+recipes:
+  - core/recipes/audio_media_type
+  - core/recipes/document_media_type
+  - core/recipes/image_media_type
+  - core/recipes/local_video_media_type
+  - core/recipes/remote_video_media_type
+
+install:
+  - easy_responsive_images
+  - media_entity_download
+  - media_file_delete
+  - media_library_edit
+
+config:
+  # If the config we're importing already exists, skip it.
+  strict: false
+  import:
+    focal_point: '*'
+  actions:
+    # Sets all media image fields to use focal point.
+    core.entity_form_display.media.image.*:
+      setComponent:
+        name: field_media_image
+        options:
+          type: image_focal_point
+          weight: 1
+          region: content
+          settings:
+            progress_indicator: throbber
+            preview_image_style: media_library
+            preview_link: true
+            offsets: '50,50'
