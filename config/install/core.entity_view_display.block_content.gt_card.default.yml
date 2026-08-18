@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.field.block_content.gt_card.field_gt_card_link
+    - field.field.block_content.gt_card.field_gt_card_media
+    - field.field.block_content.gt_card.field_gt_card_header
+    - field.field.block_content.gt_card.field_gt_card_date
+    - field.field.block_content.gt_card.field_gt_card_subheading
+    - field.field.block_content.gt_card.field_gt_card_lede
+    - field.field.block_content.gt_card.field_gt_card_content
+    - field.field.block_content.gt_card.field_gt_card_footer
+    - field.field.block_content.gt_card.field_gt_card_variant
+  module: [datetime, link, media, text]
+id: block_content.gt_card.default
+targetEntityType: block_content
+bundle: gt_card
+mode: default
+content:
+  field_gt_card_media:      { weight: 0, label: hidden, type: entity_reference_entity_view, region: content, settings: { view_mode: default }, third_party_settings: {} }
+  field_gt_card_header:     { weight: 1, label: hidden, type: string,          region: content, settings: { link_to_entity: false }, third_party_settings: {} }
+  field_gt_card_date:       { weight: 2, label: hidden, type: datetime_default, region: content, settings: { format_type: html_date, timezone_override: '' }, third_party_settings: {} }
+  field_gt_card_subheading: { weight: 3, label: hidden, type: string,          region: content, settings: { link_to_entity: false }, third_party_settings: {} }
+  field_gt_card_lede:       { weight: 4, label: hidden, type: basic_string,    region: content, settings: {}, third_party_settings: {} }
+  field_gt_card_content:    { weight: 5, label: hidden, type: text_default,    region: content, settings: {}, third_party_settings: {} }
+  field_gt_card_footer:     { weight: 6, label: hidden, type: basic_string,    region: content, settings: {}, third_party_settings: {} }
+  field_gt_card_link:       { weight: 7, label: hidden, type: link,            region: content, settings: { trim_length: 80, url_only: false, url_plain: false, rel: '', target: '' }, third_party_settings: {} }
+hidden:
+  field_gt_card_variant: true

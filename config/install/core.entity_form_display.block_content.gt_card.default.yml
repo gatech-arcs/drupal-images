@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.field.block_content.gt_card.field_gt_card_link
+    - field.field.block_content.gt_card.field_gt_card_media
+    - field.field.block_content.gt_card.field_gt_card_header
+    - field.field.block_content.gt_card.field_gt_card_date
+    - field.field.block_content.gt_card.field_gt_card_subheading
+    - field.field.block_content.gt_card.field_gt_card_lede
+    - field.field.block_content.gt_card.field_gt_card_content
+    - field.field.block_content.gt_card.field_gt_card_footer
+    - field.field.block_content.gt_card.field_gt_card_variant
+  module: [datetime, link, media_library, options, text]
+id: block_content.gt_card.default
+targetEntityType: block_content
+bundle: gt_card
+mode: default
+content:
+  field_gt_card_media:      { weight: 0, type: media_library_widget, region: content, settings: { media_types: [] }, third_party_settings: {} }
+  field_gt_card_link:       { weight: 1, type: link_default,          region: content, settings: { placeholder_url: '', placeholder_title: '' }, third_party_settings: {} }
+  field_gt_card_header:     { weight: 2, type: string_textfield,      region: content, settings: { size: 60, placeholder: 'Card title' }, third_party_settings: {} }
+  field_gt_card_date:       { weight: 3, type: datetime_datelist,     region: content, settings: { increment: 1, date_order: YMD, time_type: none }, third_party_settings: {} }
+  field_gt_card_subheading: { weight: 4, type: string_textfield,      region: content, settings: { size: 60, placeholder: '' }, third_party_settings: {} }
+  field_gt_card_lede:       { weight: 5, type: string_textarea,       region: content, settings: { rows: 3, placeholder: '' }, third_party_settings: {} }
+  field_gt_card_content:    { weight: 6, type: text_textarea,         region: content, settings: { rows: 6, placeholder: '' }, third_party_settings: {} }
+  field_gt_card_footer:     { weight: 7, type: string_textarea,       region: content, settings: { rows: 2, placeholder: '' }, third_party_settings: {} }
+  field_gt_card_variant:    { weight: 8, type: options_buttons,       region: content, settings: {}, third_party_settings: {} }
+hidden: {}

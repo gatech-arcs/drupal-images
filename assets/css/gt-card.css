@@ -1,0 +1,442 @@
+/**
+ * @file gt-card.css
+ * GT Card block component.
+ *
+ * BEM structure:
+ *   .gt-card                  position: relative; contains stretched-link ::after
+ *   .gt-card__media           aspect-ratio image area; navy bg fills letterbox gaps
+ *   .gt-card__header / __title
+ *   .gt-card__body            flex column: __date, __subheading, __lede, __content
+ *   .gt-card__footer
+ *   .gt-card__link            stretched-link overlay (::after, z-index: 1)
+ *   .gt-visually-hidden       module-local accessible-hide utility
+ *
+ * Variants (BEM modifiers via field_gt_card_variant):
+ *   --gold  --dark  --bordered  --media-full  --compact  --horizontal
+ *
+ * Private property pattern: all token reads are remapped at .gt-card to --_*
+ * aliases. Variants override only the --_* values that change. No hardcoded
+ * color literals or structural declarations appear outside the base block.
+ *
+ * Stretched link: nested interactive elements need position: relative; z-index: 2
+ * to remain clickable above the overlay.
+ */
+
+/* ── Base card + private token aliases ─────────────────────────────────── */
+
+.gt-card {
+
+  /* Surface */
+  --_bg:        var(--gt-c-white);
+  --_radius:    var(--gt-b-radius-md);
+  --_shadow:    var(--gt-e-shadow-card);
+  --_shadow-hv: var(--gt-e-shadow-card-hover);
+  --_pad:       var(--gt-p-card);
+  --_gap:       var(--gt-m-between-text-sm);
+  --_trans:     var(--gt-e-transition) var(--gt-e-ease);
+
+  /* Media */
+  --_media-bg:  var(--gt-c-navy-blue);
+  --_media-ar:  var(--gt-e-card-aspect);
+  --_media-fit: var(--gt-e-card-fit);
+
+  /* Title */
+  --_title-f:   var(--gt-f-heading);
+  --_title-sz:  var(--gt-f-size-xl);
+  --_title-wt:  600;
+  --_title-lh:  var(--gt-f-lh-snug);
+  --_title-c:   var(--gt-c-navy-blue);
+
+  /* Body text */
+  --_body-c:    var(--gt-c-black);
+  --_lede-c:    var(--gt-c-gray-matter);
+  --_date-c:    var(--gt-c-gray-matter);
+  --_date-sz:   var(--gt-f-size-sm);
+  --_sub-c:     var(--gt-c-tech-dark-gold);
+  --_sub-sz:    var(--gt-f-size-xs);
+
+  /* Footer */
+  --_foot-b:    1px solid var(--gt-c-pi-mile);
+  --_foot-c:    var(--gt-c-gray-matter);
+  --_foot-sz:   var(--gt-f-size-sm);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--_bg);
+  border-radius: var(--_radius);
+  box-shadow: var(--_shadow);
+  overflow: hidden;
+  height: 100%;
+  transition: box-shadow var(--_trans), transform var(--_trans);
+}
+
+/* Hover/focus driven through the link overlay, not the card element directly. */
+.gt-card:has(.gt-card__link:hover),
+.gt-card:has(.gt-card__link:focus-visible) {
+  box-shadow: var(--_shadow-hv);
+  transform: translateY(-2px);
+}
+
+/* ── Media ─────────────────────────────────────────────────────────────── */
+
+.gt-card__media {
+  background-color: var(--_media-bg);
+  aspect-ratio: var(--_media-ar);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.gt-card__media img,
+.gt-card__media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--_media-fit);
+  object-position: center;
+}
+
+/* Drupal media entity field wrappers */
+.gt-card__media .field--name-field-media-image,
+.gt-card__media .media,
+.gt-card__media .media__element {
+  height: 100%;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+
+.gt-card__header {
+  padding: var(--_pad) var(--_pad) 0;
+}
+
+.gt-card__title {
+  font-family: var(--_title-f);
+  font-size: var(--_title-sz);
+  font-weight: var(--_title-wt);
+  line-height: var(--_title-lh);
+  color: var(--_title-c);
+  margin: 0;
+}
+
+.gt-card__header .field {
+  display: contents;
+}
+
+/* ── Body ──────────────────────────────────────────────────────────────── */
+
+.gt-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--_gap);
+  padding: var(--gt-p-card-body) var(--_pad);
+}
+
+.gt-card__date {
+  font-size: var(--_date-sz);
+  color: var(--_date-c);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.gt-card__date time {
+  display: inline;
+}
+
+.gt-card__subheading {
+  font-family: var(--gt-f-text);
+  font-size: var(--_sub-sz);
+  font-weight: 700;
+  color: var(--_sub-c);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.gt-card__lede {
+  font-size: var(--gt-f-size-md);
+  color: var(--_lede-c);
+  line-height: var(--gt-f-lh-relaxed);
+  margin: 0;
+}
+
+.gt-card__content {
+  font-size: var(--gt-f-size-md);
+  color: var(--_body-c);
+  line-height: var(--gt-f-lh-base);
+}
+
+.gt-card__content > :first-child { margin-block-start: 0; }
+.gt-card__content > :last-child  { margin-block-end: 0; }
+
+/* Nested interactive elements above the z-index: 1 stretched-link overlay. */
+.gt-card__content a,
+.gt-card__content button,
+.gt-card__body a,
+.gt-card__footer a,
+.gt-card__footer button {
+  position: relative;
+  z-index: 2;
+}
+
+.gt-card__body .field,
+.gt-card__body .field__item {
+  display: contents;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+
+.gt-card__footer {
+  padding: var(--gt-p-card-body) var(--_pad);
+  border-top: var(--_foot-b);
+  font-size: var(--_foot-sz);
+  color: var(--_foot-c);
+  margin-block-start: auto;
+}
+
+/* ── Stretched link overlay ───────────────────────────────────────────────
+ * .gt-card__link is in the DOM for :focus-visible; ::after covers the card.
+ * Ref: adrianroselli.com/2020/02/block-links-cards-clickable-regions-etc.html
+ */
+
+.gt-card__link {
+  display: block;
+  position: static;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  text-decoration: none;
+}
+
+.gt-card__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+.gt-card__link:focus {
+  outline: none;
+}
+
+.gt-card__link:focus-visible::after {
+  outline: var(--gt-e-focus-width) solid var(--gt-e-focus-color);
+  outline-offset: var(--gt-e-focus-offset);
+}
+
+/* ── Visually hidden (module-local) ─────────────────────────────────────── */
+
+.gt-visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ── Variants ──────────────────────────────────────────────────────────── */
+
+/* Gold: GT Gold top accent bar, navy media background. */
+.gt-card--gold {
+  --_title-c:  var(--gt-c-tech-dark-gold);
+  --_media-bg: var(--gt-c-navy-blue);
+
+  border-top: 4px solid var(--gt-c-tech-gold);
+}
+
+/* Dark: navy background, reversed text.
+ * Contrast: tech-gold on navy ≈ 4.8:1 (WCAG AA passes). */
+.gt-card--dark {
+  --_bg:        var(--gt-c-navy-blue);
+  --_title-c:   var(--gt-c-tech-gold);
+  --_body-c:    var(--gt-c-diploma);
+  --_lede-c:    var(--gt-c-pi-mile);
+  --_date-c:    var(--gt-c-pi-mile);
+  --_sub-c:     var(--gt-c-tech-gold);
+  --_foot-b:    1px solid color-mix(in oklch, var(--gt-c-white) 12%, transparent);
+  --_foot-c:    var(--gt-c-pi-mile);
+  --_shadow:    0 2px 8px oklch(0% 0 0 / 30%);
+  --_shadow-hv: 0 8px 28px oklch(0% 0 0 / 45%);
+}
+
+/* Bordered: explicit border ring, no shadow. Useful on coloured backgrounds. */
+.gt-card--bordered {
+  --_shadow: none;
+
+  border: 1px solid var(--gt-c-pi-mile);
+}
+
+.gt-card--bordered:has(.gt-card__link:hover),
+.gt-card--bordered:has(.gt-card__link:focus-visible) {
+  border-color: var(--gt-c-tech-gold);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Media Full: full-bleed background image with navy gradient scrim.
+ * z-index: 0=media, 1=scrim (::before), 2=text, 3=link overlay.        */
+.gt-card--media-full {
+  --_media-ar: auto;
+  --_title-c:  var(--gt-c-white);
+  --_body-c:   var(--gt-c-diploma);
+  --_lede-c:   var(--gt-c-pi-mile);
+  --_date-c:   var(--gt-c-pi-mile);
+  --_foot-b:   1px solid color-mix(in oklch, var(--gt-c-white) 15%, transparent);
+  --_foot-c:   var(--gt-c-pi-mile);
+
+  min-height: 320px;
+  justify-content: flex-end;
+}
+
+.gt-card--media-full .gt-card__media {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  z-index: 0;
+}
+
+.gt-card--media-full .gt-card__media img,
+.gt-card--media-full .gt-card__media video {
+  height: 100%;
+  object-fit: cover;
+}
+
+.gt-card--media-full::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    color-mix(in oklch, var(--gt-c-navy-blue) 90%, transparent) 0%,
+    color-mix(in oklch, var(--gt-c-navy-blue) 55%, transparent) 40%,
+    color-mix(in oklch, var(--gt-c-navy-blue) 10%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.gt-card--media-full .gt-card__header,
+.gt-card--media-full .gt-card__body,
+.gt-card--media-full .gt-card__footer {
+  position: relative;
+  z-index: 2;
+}
+
+.gt-card--media-full .gt-card__link::after {
+  z-index: 3;
+}
+
+/* Compact: reduced padding and smaller title. */
+.gt-card--compact {
+  --_pad:      var(--gt-p-text-to-container-vert);
+  --_title-sz: var(--gt-f-size-lg);
+  --_gap:      0;
+}
+
+.gt-card--compact .gt-card__body {
+  padding-block: calc(var(--gt-p-text-to-container-vert) / 2);
+}
+
+/* Horizontal: side-by-side media + content; stacks below 600px. */
+.gt-card--horizontal {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.gt-card--horizontal .gt-card__media {
+  width: 40%;
+  min-width: 140px;
+  max-width: 260px;
+  flex-shrink: 0;
+  aspect-ratio: auto;
+}
+
+.gt-card--horizontal .gt-card__media img,
+.gt-card--horizontal .gt-card__media video {
+  height: 100%;
+}
+
+.gt-card--horizontal .gt-card__header {
+  padding-block-start: var(--_pad);
+}
+
+@media (max-width: 600px) {
+  .gt-card--horizontal {
+    flex-direction: column;
+  }
+
+  .gt-card--horizontal .gt-card__media {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: var(--_media-ar);
+  }
+}
+
+/* ── Layout Builder admin context ──────────────────────────────────────── */
+
+/* Suppress overlay pointer-events so drag handles remain operable. */
+.layout-builder .gt-card__link::after {
+  pointer-events: none;
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────── */
+
+@media print {
+  .gt-card {
+    box-shadow: none;
+    border: 1px solid var(--gt-c-pi-mile);
+    break-inside: avoid;
+    height: auto;
+  }
+
+  .gt-card--media-full .gt-card__media {
+    position: static;
+    height: 200px;
+  }
+
+  .gt-card--media-full::before,
+  .gt-card__link::after {
+    display: none;
+  }
+
+  .gt-card--horizontal {
+    flex-direction: column;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .gt-card {
+    transition: none;
+  }
+
+  .gt-card:has(.gt-card__link:hover),
+  .gt-card:has(.gt-card__link:focus-visible) {
+    transform: none;
+  }
+}
+
+/* ── Forced colors / Windows High Contrast Mode ──────────────────────────  */
+
+@media (forced-colors: active) {
+  .gt-card {
+    border: 1px solid ButtonText;
+  }
+
+  .gt-card__link:focus-visible::after {
+    outline: 3px solid Highlight;
+  }
+
+  /* Scrim hides text in HCM — remove so forced colors remain visible. */
+  .gt-card--media-full::before {
+    display: none;
+  }
+}

@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module: [block_content, media]
+id: block_content.field_gt_card_media
+field_name: field_gt_card_media
+entity_type: block_content
+type: entity_reference
+settings:
+  target_type: media
+cardinality: 1
+translatable: false

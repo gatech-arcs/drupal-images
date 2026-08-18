@@ -1,0 +1,28 @@
+{#
+/**
+ * @file gt-grid-container.html.twig
+ * GT Grid Container layout template.
+ * @see \Drupal\gt_components\Plugin\Layout\GtGridContainerLayout
+ * @ingroup themeable
+ */
+#}
+{%
+  set wrapper_classes = [
+    'gt-grid-container',
+    settings.full_bleed ? 'gt-grid-container--full-bleed',
+  ]|filter
+%}
+{%
+  set inline_styles =
+    '--gt-grid-columns: '        ~ settings.columns        ~ '; ' ~
+    '--gt-grid-column-gap: '     ~ settings.column_gap     ~ '; ' ~
+    '--gt-grid-row-gap: '        ~ settings.row_gap        ~ '; ' ~
+    '--gt-grid-max-width: '      ~ settings.max_width      ~ '; ' ~
+    '--gt-grid-padding: '        ~ settings.padding        ~ '; ' ~
+    '--gt-grid-item-min-width: ' ~ settings.item_min_width ~ ';'
+%}
+<div {{ attributes.addClass(wrapper_classes).setAttribute('style', inline_styles) }}>
+  <div {{ region_attributes.content.addClass('gt-grid-container__inner') }}>
+    {{ content.content }}
+  </div>
+</div>

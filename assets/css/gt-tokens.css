@@ -1,0 +1,131 @@
+/**
+ * @file gt-tokens.css
+ * GT Components token stub. Replace with a symlink or empty file once the
+ * site's gt-tokens.css pipeline loads first.
+ *
+ * Prefix convention (mirrors site gt-tokens.css):
+ *   --gt-b-   border   --gt-c-  color   --gt-e-  effects
+ *   --gt-f-   font     --gt-m-  margin  --gt-p-  padding   --gt-w-  width
+ *
+ * 🆕 = suggested additions to the site gt-tokens.css.
+ */
+
+@layer gt.tokens {
+
+  :root {
+
+    /* Brand palette — HEX fallbacks, OKLCH inside @supports */
+    --gt-c-tech-gold:        #b3a369;
+    --gt-c-tech-medium-gold: #a4925a;
+    --gt-c-tech-dark-gold:   #857437;
+    --gt-c-tech-gold-light:  #bfb37c;
+    --gt-c-navy-blue:        #003057;
+    --gt-c-white:            #ffffff;
+    --gt-c-black:            #262626;
+    --gt-c-diploma:          #f9f6e5;
+    --gt-c-pi-mile:          #d6dbd4;
+    --gt-c-gray-matter:      #54585a;
+    --gt-c-buzz-gold:        #eaaa00;
+
+    @supports (color: oklch(0% 0 0)) {
+      --gt-c-tech-gold:        oklch(71.8%  0.0791 92.819);
+      --gt-c-tech-medium-gold: oklch(66.3%  0.0779 92.23);
+      --gt-c-tech-dark-gold:   oklch(56.16% 0.0834 93.99);
+      --gt-c-tech-gold-light:  oklch(76.37% 0.0742 97.33);
+      --gt-c-navy-blue:        oklch(30.37% 0.0848 249.45);
+      --gt-c-white:            oklch(100%   0      0);
+      --gt-c-black:            oklch(26.86% 0      0);
+      --gt-c-diploma:          oklch(97.09% 0.0226 98.63);
+      --gt-c-pi-mile:          oklch(88.56% 0.0109 136.56);
+      --gt-c-gray-matter:      oklch(45.75% 0.0061 228.93);
+      --gt-c-buzz-gold:        oklch(77.78% 0.1605 81.33);
+    }
+
+    /* Spacing / layout (mirrors site values) */
+    --gt-b-radius:                  0.25rem;
+    --gt-w-max:                     48rem;
+    --gt-w-copy:                    clamp(18.75ch, 50% + 2rem, 75ch);
+    --gt-e-transition:              0.3s;
+    --gt-m-between-sections:        3rem;
+    --gt-m-between-components-vert: 1.5rem;
+    --gt-m-between-cards:           1rem;
+    --gt-m-between-elements:        1rem;
+    --gt-m-text-to-element:         2rem;
+    --gt-m-headings-to-text-base:   2rem;
+    --gt-m-between-text-base:       1rem;
+    --gt-p-text-to-container-horz:  2rem;
+    --gt-p-text-to-container-vert:  1rem;
+
+    /* Fonts (mirrors site values) */
+    --gt-f-text:    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --gt-f-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Note: --gt-f-brand is declared but unassigned in site tokens;
+       --gt-f-heading used as fallback for card titles until it is defined. */
+
+    /* ── 🆕 Suggested additions to site gt-tokens.css ──────────────────── */
+
+    /* Semantic color aliases — BROKEN TODAY: gt-reset.css references these */
+    --gt-c-brand-primary:   var(--gt-c-navy-blue);
+    --gt-c-brand-secondary: var(--gt-c-tech-gold);
+    --gt-c-background:      var(--gt-c-white);
+    --gt-c-text:            var(--gt-c-black);
+    --gt-c-text-muted:      var(--gt-c-gray-matter);
+
+    /* Mono font — BROKEN TODAY: gt-reset.css code/kbd/pre references this */
+    --gt-f-mono: 'Roboto Mono', ui-monospace, 'Courier New', monospace;
+
+    /* Font size scale */
+    --gt-f-size-xs:  0.75rem;
+    --gt-f-size-sm:  0.875rem;
+    --gt-f-size-md:  1rem;
+    --gt-f-size-lg:  1.125rem;
+    --gt-f-size-xl:  1.25rem;
+    --gt-f-size-2xl: 1.5rem;
+    --gt-f-size-3xl: 1.875rem;
+
+    /* Line-height scale */
+    --gt-f-lh-tight:   1.25;
+    --gt-f-lh-snug:    1.375;
+    --gt-f-lh-base:    1.5;
+    --gt-f-lh-relaxed: 1.625;
+
+    /* Border-radius scale (extends --gt-b-radius: 0.25rem) */
+    --gt-b-radius-sm:   0.25rem;
+    --gt-b-radius-md:   0.5rem;
+    --gt-b-radius-lg:   1rem;
+    --gt-b-radius-xl:   1.5rem;
+    --gt-b-radius-full: 9999px;
+
+    /* Effects: ease + fast variant to complement --gt-e-transition */
+    --gt-e-ease:            cubic-bezier(0.4, 0, 0.2, 1);
+    --gt-e-transition-fast: 0.12s;
+
+    /* Effects: shadow scale */
+    --gt-e-shadow-sm:         0 1px 3px oklch(0% 0 0 / 8%), 0 1px 2px oklch(0% 0 0 / 5%);
+    --gt-e-shadow-md:         0 4px 12px oklch(0% 0 0 / 8%), 0 2px 4px oklch(0% 0 0 / 5%);
+    --gt-e-shadow-lg:         0 10px 24px oklch(0% 0 0 / 10%), 0 4px 8px oklch(0% 0 0 / 6%);
+    --gt-e-shadow-card:       var(--gt-e-shadow-sm);
+    --gt-e-shadow-card-hover: 0 8px 24px color-mix(in oklch, var(--gt-c-navy-blue) 16%, transparent),
+                              0 4px 8px  color-mix(in oklch, var(--gt-c-navy-blue)  8%, transparent);
+
+    /* Effects: focus ring */
+    --gt-e-focus-color:  var(--gt-c-tech-gold);
+    --gt-e-focus-width:  3px;
+    --gt-e-focus-offset: 2px;
+
+    /* Width: layout sizing */
+    --gt-w-grid:     1200px;
+    --gt-w-card-min: 280px;
+
+    /* Spacing additions */
+    --gt-m-between-text-sm: 0.5rem;
+    --gt-p-card:             var(--gt-p-text-to-container-horz);
+    --gt-p-card-body:        var(--gt-p-text-to-container-vert);
+
+    /* Card media */
+    --gt-e-card-aspect: 16 / 9;
+    --gt-e-card-fit:    cover;
+
+  }
+
+}

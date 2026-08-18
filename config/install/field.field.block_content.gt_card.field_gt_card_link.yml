@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_link
+  module: [link]
+id: block_content.gt_card.field_gt_card_link
+field_name: field_gt_card_link
+entity_type: block_content
+bundle: gt_card
+label: 'Card Link'
+description: 'Primary destination for the card. Accepts internal Drupal paths and external URLs.'
+required: false
+translatable: true
+default_value: []
+settings:
+  link_type: 17
+  title: 1
+field_type: link

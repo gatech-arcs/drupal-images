@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_date
+  module: [datetime]
+id: block_content.gt_card.field_gt_card_date
+field_name: field_gt_card_date
+entity_type: block_content
+bundle: gt_card
+label: 'Card Date'
+description: 'Optional date displayed above the subheading.'
+required: false
+translatable: true
+default_value: []
+settings: {}
+field_type: datetime

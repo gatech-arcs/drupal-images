@@ -1,0 +1,65 @@
+{#
+/**
+ * @file block--block-content--gt-card.html.twig
+ * GT Card block content template.
+ *
+ * Stretched link pattern: .gt-card__link::after covers the card surface
+ * (position: absolute; inset: 0; z-index: 1). Nested interactive elements
+ * must use position: relative; z-index: 2.
+ *
+ * aria-labelledby points to .gt-card__title when a header is present.
+ * aria-label falls back to the link title or 'Read more' otherwise.
+ *
+ * @see \Drupal\gt_components\Hook\GtComponentsHooks
+ * @ingroup themeable
+ */
+#}
+
+<article {{ attributes.addClass(gt_card_classes) }}>
+
+  {% if gt_card_has_media and content.field_gt_card_media|render %}
+    <div class="gt-card__media">
+      {{ content.field_gt_card_media }}
+    </div>
+  {% endif %}
+
+  {% if content.field_gt_card_header|render %}
+    <div class="gt-card__header">
+      <h3 class="gt-card__title" id="{{ attributes.id }}-title">
+        {{- content.field_gt_card_header -}}
+      </h3>
+    </div>
+  {% endif %}
+
+  <div class="gt-card__body">
+    {% if content.field_gt_card_date|render %}
+      <div class="gt-card__date">{{- content.field_gt_card_date -}}</div>
+    {% endif %}
+    {% if content.field_gt_card_subheading|render %}
+      <p class="gt-card__subheading">{{- content.field_gt_card_subheading -}}</p>
+    {% endif %}
+    {% if content.field_gt_card_lede|render %}
+      <p class="gt-card__lede">{{- content.field_gt_card_lede -}}</p>
+    {% endif %}
+    {% if content.field_gt_card_content|render %}
+      <div class="gt-card__content">{{ content.field_gt_card_content }}</div>
+    {% endif %}
+  </div>
+
+  {% if content.field_gt_card_footer|render %}
+    <div class="gt-card__footer">{{ content.field_gt_card_footer }}</div>
+  {% endif %}
+
+  {% if gt_card_has_link and gt_card_link %}
+    <a class="gt-card__link"
+       href="{{ gt_card_link.url }}"
+       {% if content.field_gt_card_header|render %}
+         aria-labelledby="{{ attributes.id }}-title"
+       {% else %}
+         aria-label="{{ gt_card_link.aria_label }}"
+       {% endif %}
+       {% if gt_card_link.is_external %}target="_blank" rel="noopener noreferrer"{% endif %}
+    ><span class="gt-visually-hidden">{{ gt_card_link.aria_label }}</span></a>
+  {% endif %}
+
+</article>

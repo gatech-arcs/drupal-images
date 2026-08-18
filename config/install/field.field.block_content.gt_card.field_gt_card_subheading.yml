@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_subheading
+id: block_content.gt_card.field_gt_card_subheading
+field_name: field_gt_card_subheading
+entity_type: block_content
+bundle: gt_card
+label: 'Subheading / Category Label'
+description: 'Short eyebrow label displayed in uppercase above the lede.'
+required: false
+translatable: true
+default_value: []
+settings: {}
+field_type: string

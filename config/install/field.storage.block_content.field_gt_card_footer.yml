@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  module: [block_content]
+id: block_content.field_gt_card_footer
+field_name: field_gt_card_footer
+entity_type: block_content
+type: string_long
+settings:
+  case_sensitive: false
+cardinality: 1
+translatable: true

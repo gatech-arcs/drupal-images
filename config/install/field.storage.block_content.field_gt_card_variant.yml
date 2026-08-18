@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module: [block_content, options]
+id: block_content.field_gt_card_variant
+field_name: field_gt_card_variant
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    - { value: gold,       label: 'Gold Theme (GT Gold accent)' }
+    - { value: dark,       label: 'Dark (Navy background)' }
+    - { value: bordered,   label: 'Bordered (outline, no shadow)' }
+    - { value: media-full, label: 'Full Media Background' }
+    - { value: compact,    label: 'Compact (reduced padding)' }
+    - { value: horizontal, label: 'Horizontal (side-by-side)' }
+  allowed_values_function: ''
+cardinality: -1
+translatable: false

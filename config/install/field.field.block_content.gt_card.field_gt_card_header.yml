@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_header
+id: block_content.gt_card.field_gt_card_header
+field_name: field_gt_card_header
+entity_type: block_content
+bundle: gt_card
+label: 'Card Title'
+description: 'Card heading. Used as accessible link label when no explicit link title is set.'
+required: false
+translatable: true
+default_value: []
+settings: {}
+field_type: string

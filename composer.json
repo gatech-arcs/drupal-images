@@ -1,0 +1,31 @@
+{
+    "name": "gtsciences/gt_components",
+    "description": "Layouts and components for Drupal's Layout Builder, not tied to a theme",
+    "type": "drupal-custom-module",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.gatech.edu/web-services/gt_components",
+    "authors": [
+        {
+            "name": "College of Sciences, Georgia Tech"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "drupal/core": "^11.4 || ^12"
+    },
+    "suggest": {
+        "drupal/layout_builder": "Required for the layout plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\gt_components\\": "src/"
+        }
+    },
+    "extra": {
+        "drupal": {
+            "version": "1.0.0"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

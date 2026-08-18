@@ -1,0 +1,100 @@
+/**
+ * @file gt-grid-container.css
+ * GT Grid Container layout plugin.
+ *
+ * .gt-grid-container      — outer wrapper; receives --gt-grid-* inline props
+ *                           from GtGridContainerLayout, remapped to --_* aliases.
+ * .gt-grid-container__inner — constrained grid; also carries Drupal's
+ *                             layout-region classes for Layout Builder UI.
+ *
+ * Grid collapse: auto-fill + minmax(min(item-min, derived-col-width), 1fr).
+ * At full width, derived width ≥ item-min → exactly --_cols columns.
+ * On narrow viewports, min() forces single-column collapse — no breakpoints.
+ *
+ * Static @media at 1200px removes inner padding (default --gt-w-grid value).
+ * CSS cannot evaluate custom properties in @media — add a theme override if
+ * you change max-width via the Layout Builder form.
+ */
+
+.gt-grid-container {
+  --_cols:     var(--gt-grid-columns,        3);
+  --_col-gap:  var(--gt-grid-column-gap,     var(--gt-m-between-cards));
+  --_row-gap:  var(--gt-grid-row-gap,        var(--gt-m-between-cards));
+  --_max-w:    var(--gt-grid-max-width,      var(--gt-w-grid));
+  --_pad:      var(--gt-grid-padding,        var(--gt-p-text-to-container-horz));
+  --_item-min: var(--gt-grid-item-min-width, var(--gt-w-card-min));
+
+  width: 100%;
+}
+
+/* Extends background to 100vw; inner grid stays within --_max-w. */
+.gt-grid-container--full-bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.gt-grid-container__inner {
+  max-width: var(--_max-w);
+  margin-inline: auto;
+  padding-inline: var(--_pad);
+
+  display: grid;
+
+  /*
+   * auto-fill + minmax(min(item-min, exact-col-width), 1fr)
+   * yields --_cols columns at full width; collapses fluidly below item-min.
+   */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      min(
+        var(--_item-min),
+        calc((100% - (var(--_cols) - 1) * var(--_col-gap)) / var(--_cols))
+      ),
+      1fr
+    )
+  );
+
+  column-gap: var(--_col-gap);
+  row-gap:    var(--_row-gap);
+  align-items: stretch;
+}
+
+@media (min-width: 1200px) {
+  .gt-grid-container__inner {
+    padding-inline: 0;
+  }
+}
+
+/* Safety net: single column on very narrow viewports. */
+@media (max-width: 480px) {
+  .gt-grid-container__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Minimum height for empty regions in Layout Builder admin context. */
+.layout-builder .gt-grid-container__inner {
+  min-height: 4rem;
+}
+
+@media print {
+  .gt-grid-container--full-bleed {
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .gt-grid-container__inner {
+    grid-template-columns: 1fr;
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gt-grid-container,
+  .gt-grid-container * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {}
+id: gt_card
+label: 'GT Card'
+revision: true
+description: 'Georgia Tech reusable card for Layout Builder.'

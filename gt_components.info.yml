@@ -1,0 +1,16 @@
+name: 'GT Components'
+type: module
+description: "Layouts and components for Drupal's Layout Builder, not tied to a theme"
+package: 'Georgia Tech'
+core_version_requirement: ^11.4 || ^12
+dependencies:
+  - drupal:block
+  - drupal:block_content
+  - drupal:datetime
+  - drupal:field
+  - drupal:layout_builder
+  - drupal:link
+  - drupal:media
+  - drupal:media_library
+  - drupal:options
+  - drupal:text

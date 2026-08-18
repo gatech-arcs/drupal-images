@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_variant
+  module: [options]
+id: block_content.gt_card.field_gt_card_variant
+field_name: field_gt_card_variant
+entity_type: block_content
+bundle: gt_card
+label: 'Style Variants'
+description: 'Select one or more visual style variants. Each adds a BEM modifier class. Multiple variants can be combined.'
+required: false
+translatable: false
+default_value: []
+settings: {}
+field_type: list_string

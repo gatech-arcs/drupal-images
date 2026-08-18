@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_lede
+id: block_content.gt_card.field_gt_card_lede
+field_name: field_gt_card_lede
+entity_type: block_content
+bundle: gt_card
+label: 'Lede / Summary'
+description: 'Plain-text one-to-two sentence teaser.'
+required: false
+translatable: true
+default_value: []
+settings: {}
+field_type: string_long

@@ -1,0 +1,29 @@
+gt_base:
+  version: VERSION
+  css:
+    base:
+      assets/css/gt-tokens.css: {}
+    component:
+      assets/css/gt-reset.css: {}
+
+gt_grid_container:
+  version: VERSION
+  dependencies:
+    - gt_components/gt_base
+  css:
+    component:
+      assets/css/gt-grid-container.css: {}
+
+gt_card:
+  version: VERSION
+  dependencies:
+    - gt_components/gt_base
+  css:
+    component:
+      assets/css/gt-card.css: {}
+
+gt_all:
+  version: VERSION
+  dependencies:
+    - gt_components/gt_grid_container
+    - gt_components/gt_card

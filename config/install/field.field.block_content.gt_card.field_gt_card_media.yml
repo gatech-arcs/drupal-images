@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_media
+    - media.type.image
+  module: [media]
+id: block_content.gt_card.field_gt_card_media
+field_name: field_gt_card_media
+entity_type: block_content
+bundle: gt_card
+label: 'Card Media'
+description: 'Optional Image media. Requires the Image media type — run: drush recipe core/recipes/image_media_type'
+required: false
+translatable: false
+default_value: []
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

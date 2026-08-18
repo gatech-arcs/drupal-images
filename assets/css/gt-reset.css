@@ -1,0 +1,49 @@
+/**
+ * @file gt-reset.css
+ * Scoped component reset — targets .gt-* elements only.
+ * Replace with empty file once the site's gt-reset.css covers these elements.
+ */
+
+.gt-grid-container,
+.gt-card {
+  box-sizing: border-box;
+}
+
+.gt-grid-container *,
+.gt-grid-container *::before,
+.gt-grid-container *::after,
+.gt-card *,
+.gt-card *::before,
+.gt-card *::after {
+  box-sizing: inherit;
+}
+
+.gt-card__title,
+.gt-card__subheading,
+.gt-card__lede {
+  margin-block: 0;
+}
+
+.gt-card__media img,
+.gt-card__media video,
+.gt-card__media picture {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+.gt-card__content a {
+  text-decoration: underline;
+  text-underline-offset: 0.2ex;
+}
+
+.gt-card__content ul,
+.gt-card__content ol {
+  padding-inline-start: var(--gt-p-text-to-container-horz);
+  margin-block: var(--gt-m-between-text-sm);
+}
+
+.gt-card__footer button {
+  font: inherit;
+  cursor: pointer;
+}

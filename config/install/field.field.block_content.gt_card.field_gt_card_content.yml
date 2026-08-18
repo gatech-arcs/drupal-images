@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.gt_card
+    - field.storage.block_content.field_gt_card_content
+  module: [text]
+id: block_content.gt_card.field_gt_card_content
+field_name: field_gt_card_content
+entity_type: block_content
+bundle: gt_card
+label: 'Card Content'
+description: 'Primary body content. The only required field.'
+required: true
+translatable: true
+default_value: []
+settings: {}
+field_type: text_long
